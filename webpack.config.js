@@ -8,20 +8,23 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    static: "./dist",
-  },
 
   mode: "development",
+  devServer: {
+    static: "./dist",
+    hot: true,
+    port: 8080,
+  },
   entry: "./src/index.js",
   output: {
     filename: "main.js",
-    publicPath: "dist",
+    publicPath: "./",
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Output Management",
+      title: "Todo list",
+      template: "./src/index.html",
     }),
   ],
 };
