@@ -1,11 +1,4 @@
-/* Todo objects
-- Title
-- Description
-- DueDate
-- Priority
-*/
-
-export default class Todo {
+class Todo {
     title;
     description;
     dueDate;
@@ -49,6 +42,6 @@ export default class Todo {
     getPriority() {
         return this.priority;
     }
-
 }
 
+export {Todo};

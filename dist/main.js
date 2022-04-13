@@ -139,17 +139,6 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
-/***/ "./src/create.js":
-/*!***********************!*\
-  !*** ./src/create.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createTodo\": () => (/* binding */ createTodo)\n/* harmony export */ });\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n\r\n\r\nconst createTodo = () => {\r\n    // Get the basic elements on the page - the add button, the content container and the input field\r\n    const addButton = document.querySelector(\"main > button\");\r\n    const tableBody = document.querySelector(\"tbody\");\r\n    const inputField = document.querySelector(\"#todoInputField\");\r\n\r\n    // Add new row to content table\r\n    addButton.addEventListener(\"click\", (e) => {\r\n        const newTodo = new _todo_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](inputField.value);\r\n        // Look for the last rows id and increment it for the next one, or if none exists, then it should return undefined = falsy and therefore assign 0\r\n        let id = parseInt (\r\n                document.querySelector(\"tbody\")?.lastElementChild?.getAttribute(\"id\")\r\n            ) + 1 || 0;\r\n        const newItem = generateRow(id, newTodo.getTitle());\r\n        tableBody.appendChild(newItem);\r\n    });\r\n}\r\n\r\n//function to create new row\r\nconst generateRow = (id, text) => {\r\nlet newRow = document.createElement(\"tr\");\r\nnewRow.setAttribute(\"id\", id);\r\nnewRow.innerHTML = `\r\n        <td>\r\n            <i class=\"fa-solid fa-circle-check\"></i>\r\n            <span contenteditable=\"true\" class=\"task\">${text}</span>\r\n        </td>\r\n        <td>\r\n            <span class=\"fa-stack fa-2x\">\r\n                <i class=\"fa-solid fa-square fa-stack-2x\"></i>\r\n                <i class=\"fa-solid fa-pen fa-stack-1x fa-inverse\"></i>\r\n            </span>\r\n        </td>\r\n        <td>\r\n        <span class=\"fa-stack fa-2x\">\r\n            <i class=\"fa-solid fa-square fa-stack-2x\"></i>\r\n            <i class=\"fa-solid fa-trash fa-stack-1x fa-inverse\"></i>\r\n        </span>\r\n        </td>\r\n        `;\r\n    return newRow;\r\n};\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/create.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -157,18 +146,51 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _create_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create.js */ \"./src/create.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-free/js/fontawesome */ \"./node_modules/@fortawesome/fontawesome-free/js/fontawesome.js\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/fontawesome-free/js/solid */ \"./node_modules/@fortawesome/fontawesome-free/js/solid.js\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_3__);\n\r\n// import {} from \"./project\";\r\n\r\n\r\n\r\n\r\n\r\nwindow.addEventListener(\"load\", () => {\r\n    (0,_create_js__WEBPACK_IMPORTED_MODULE_0__.createTodo)();\r\n});\r\n\r\n\r\n\r\n\r\n// // Set todo status to complete module\r\n// // Get all check icons and add event listeners to them\r\n// let done = document.querySelectorAll(\".fa-circle-check\");\r\n// done.forEach((item) => {\r\n//   item.addEventListener(\"click\", (event) => {\r\n//     completeTask(event);\r\n//   });\r\n// });\r\n\r\n// // Mark task complete\r\n// const completeTask = (event) => {\r\n//   let task = event.target.nextElementSibling;\r\n//   let text = task.innerHTML;\r\n//   if (text.includes(\"<del>\")) {\r\n//     task.parentNode.parentNode.setAttribute(\"data-complete\", \"false\");\r\n//     text = task.firstElementChild.textContent;\r\n//     task.innerHTML = text;\r\n//   } else {\r\n//     task.innerHTML = `<del>${text}</del>`;\r\n//     task.parentNode.parentNode.setAttribute(\"data-complete\", \"true\");\r\n//   }\r\n// };\r\n\r\n// Changing todo priority module\r\n\r\n// Dom manipulation module\r\n\r\n// Popup form https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup_form\r\n\n\n//# sourceURL=webpack://todo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-free/js/fontawesome */ \"./node_modules/@fortawesome/fontawesome-free/js/fontawesome.js\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_fontawesome__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-free/js/solid */ \"./node_modules/@fortawesome/fontawesome-free/js/solid.js\");\n/* harmony import */ var _fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_solid__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _modules_controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/controller */ \"./src/modules/controller.js\");\n\r\n\r\n\r\n\r\n\r\nwindow.addEventListener(\"load\", () => {\r\n    (0,_modules_controller__WEBPACK_IMPORTED_MODULE_3__.listenForAdd)();\r\n});\r\n\n\n//# sourceURL=webpack://todo/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/todo.js":
-/*!*********************!*\
-  !*** ./src/todo.js ***!
-  \*********************/
+/***/ "./src/modules/controller.js":
+/*!***********************************!*\
+  !*** ./src/modules/controller.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\n/* Todo objects\r\n- Title\r\n- Description\r\n- DueDate\r\n- Priority\r\n*/\r\n\r\nclass Todo {\r\n    title;\r\n    description;\r\n    dueDate;\r\n    priority;\r\n\r\n    constructor(title, description, dueDate, priority) {\r\n        this.title = title;\r\n        this.description = description;\r\n        this.dueDate = dueDate;\r\n        this.priority = priority;\r\n    }\r\n\r\n    setTitle(title) {\r\n        this.title = title;\r\n    }\r\n\r\n    getTitle() {\r\n        return this.title;\r\n    }\r\n\r\n    setDescription(description) {\r\n        this.description = description;\r\n    }\r\n\r\n    getDescription() {\r\n        return this.description;\r\n    }\r\n\r\n    setDueDate(dueDate) {\r\n        this.dueDate = dueDate;\r\n    }\r\n\r\n    getDueDate() {\r\n        return this.dueDate;\r\n    }\r\n\r\n    setPriority(priority) {\r\n        this.priority = priority;\r\n    }\r\n\r\n    getPriority() {\r\n        return this.priority;\r\n    }\r\n\r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"listenForAdd\": () => (/* binding */ listenForAdd)\n/* harmony export */ });\n/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model.js */ \"./src/modules/model.js\");\n/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ \"./src/modules/view.js\");\n\r\n\r\n\r\nlet todoInputField = document.querySelector(\"#todoInputField\");\r\nconst addButton = document.querySelector(\".addTodoButton\");\r\n\r\nfunction listenForAdd() {\r\n    console.log(addButton);\r\n    addButton.addEventListener(\"click\", () => {\r\n        let todoTitle = todoInputField.value;\r\n        (0,_view_js__WEBPACK_IMPORTED_MODULE_1__.display)((0,_model_js__WEBPACK_IMPORTED_MODULE_0__.addTodo)(todoTitle));\r\n    });\r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/modules/controller.js?");
+
+/***/ }),
+
+/***/ "./src/modules/entities.js":
+/*!*********************************!*\
+  !*** ./src/modules/entities.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Todo\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\r\n    title;\r\n    description;\r\n    dueDate;\r\n    priority;\r\n\r\n    constructor(title, description, dueDate, priority) {\r\n        this.title = title;\r\n        this.description = description;\r\n        this.dueDate = dueDate;\r\n        this.priority = priority;\r\n    }\r\n\r\n    setTitle(title) {\r\n        this.title = title;\r\n    }\r\n\r\n    getTitle() {\r\n        return this.title;\r\n    }\r\n\r\n    setDescription(description) {\r\n        this.description = description;\r\n    }\r\n\r\n    getDescription() {\r\n        return this.description;\r\n    }\r\n\r\n    setDueDate(dueDate) {\r\n        this.dueDate = dueDate;\r\n    }\r\n\r\n    getDueDate() {\r\n        return this.dueDate;\r\n    }\r\n\r\n    setPriority(priority) {\r\n        this.priority = priority;\r\n    }\r\n\r\n    getPriority() {\r\n        return this.priority;\r\n    }\r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/modules/entities.js?");
+
+/***/ }),
+
+/***/ "./src/modules/model.js":
+/*!******************************!*\
+  !*** ./src/modules/model.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodo\": () => (/* binding */ addTodo)\n/* harmony export */ });\n/* harmony import */ var _entities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entities */ \"./src/modules/entities.js\");\n\r\n\r\nconst todoList = [];\r\n\r\nfunction addTodo(title, due, prio){\r\n    let newTodo = new _entities__WEBPACK_IMPORTED_MODULE_0__.Todo(title, due, prio);\r\n    todoList.push(newTodo);\r\n    return todoList;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/modules/model.js?");
+
+/***/ }),
+
+/***/ "./src/modules/view.js":
+/*!*****************************!*\
+  !*** ./src/modules/view.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"display\": () => (/* binding */ display)\n/* harmony export */ });\nconst todoTable = document.querySelector(\"table\");\r\n\r\nfunction display(currentTodoArray){\r\n    // Wipeout current list\r\n    todoTable.innerHTML = \"\";\r\n    // loop through list\r\n    currentTodoArray.forEach((todo)=>{\r\n        // Create and add a new row to the table\r\n        todoTable.appendChild(createRow(todo.title));\r\n    })\r\n}\r\n\r\nfunction createRow(title) {\r\n    console.log(title);\r\n    const newRow = document.createElement(\"tr\");\r\n    newRow.innerHTML=`<td>${title}</td>`;\r\n    return newRow;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo/./src/modules/view.js?");
 
 /***/ })
 
