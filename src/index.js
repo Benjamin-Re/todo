@@ -1,27 +1,42 @@
-import Todo from "./todo.js";
+import {createTodo} from "./create.js";
 // import {} from "./project";
-import css from './style.css';
+import css from "./style.css";
+import '@fortawesome/fontawesome-free/js/fontawesome'
+import '@fortawesome/fontawesome-free/js/solid'
 
 
-// Create Todo module
-
-
-const addButton = document.querySelector(".content > button");
-const contentContainer = document.querySelector(".content");
-const inputField = document.querySelector("#todoInputField");
-
-addButton.addEventListener("click", (e) => {
-    const newTodo = new Todo(inputField.value);
-    const newItem = document.createElement("div");
-    newItem.textContent = newTodo.title;
-    contentContainer.appendChild(newItem);
+window.addEventListener("load", () => {
+    createTodo();
 });
 
 
 
 
-// Set todo status to complete module
+// // Set todo status to complete module
+// // Get all check icons and add event listeners to them
+// let done = document.querySelectorAll(".fa-circle-check");
+// done.forEach((item) => {
+//   item.addEventListener("click", (event) => {
+//     completeTask(event);
+//   });
+// });
+
+// // Mark task complete
+// const completeTask = (event) => {
+//   let task = event.target.nextElementSibling;
+//   let text = task.innerHTML;
+//   if (text.includes("<del>")) {
+//     task.parentNode.parentNode.setAttribute("data-complete", "false");
+//     text = task.firstElementChild.textContent;
+//     task.innerHTML = text;
+//   } else {
+//     task.innerHTML = `<del>${text}</del>`;
+//     task.parentNode.parentNode.setAttribute("data-complete", "true");
+//   }
+// };
 
 // Changing todo priority module
 
 // Dom manipulation module
+
+// Popup form https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup_form
