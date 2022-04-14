@@ -1,11 +1,33 @@
-import {Todo} from "./entities";
+import {Project} from "./entities";
 
-const todoList = [];
+class Model {
+    projectList;
 
-function addTodo(title, due, prio){
-    let newTodo = new Todo(title, due, prio);
-    todoList.push(newTodo);
-    return todoList;
+    constructor(){
+        const defaultProject = new Project("default");
+        this.projectList = [defaultProject];
+    }
+
+    addProject(title){
+        console.log("inside model: add project");
+        this.projectList.push(new Project(title));
+    }
+    
+    getProject(id){
+        console.log(this.projectList[id]);
+        return this.projectList[id];
+    }
+    
+    getProjects(){
+        console.log("inside model: get projects");
+        return this.projectList;
+    }
+    
+    addTodoToProject(id, title, due, prio){
+        this.projectList[id].addTodo(title,due,prio);
+    }
+
 }
 
-export {addTodo};
+
+export {Model};

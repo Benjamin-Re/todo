@@ -1,20 +1,41 @@
-const todoTable = document.querySelector("table");
+class View {
+    todoTable;
+    projectList;
+    constructor(){
+        this.todoTable = document.querySelector("table");
+        this.projectList = document.querySelector(".projectList");
+    }
 
-function display(currentTodoArray){
-    // Wipeout current list
-    todoTable.innerHTML = "";
-    // loop through list
-    currentTodoArray.forEach((todo)=>{
+    displayProjects(currentProjectsList) {
+      this.projectList.innerHTML = "";
+      currentProjectsList.forEach((project) => {
+        this.projectList.appendChild(this.createLi(project.title));
+      });
+    }
+    
+    createLi(projectTitle) {
+      const newLi = document.createElement("li");
+      newLi.textContent = projectTitle;
+      let id = parseInt(newLi.previousElementSibling?.getAttribute("id")) +1 || 0;
+      newLi.setAttribute("id", id);
+      return newLi;
+    }
+    
+    displayTodos(currentTodoArray) {
+      // Wipeout current list
+      this.todoTable.innerHTML = "";
+      // loop through list
+      currentTodoArray.forEach((todo) => {
         // Create and add a new row to the table
-        todoTable.appendChild(createRow(todo.title));
-    })
+        this.todoTable.appendChild(createRow(todo.title));
+      });
+    }
+    
+    createRow(title) {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `<td>${title}</td>`;
+      return newRow;
+    }
 }
 
-function createRow(title) {
-    console.log(title);
-    const newRow = document.createElement("tr");
-    newRow.innerHTML=`<td>${title}</td>`;
-    return newRow;
-}
-
-export {display};
+export { View };

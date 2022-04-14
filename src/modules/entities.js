@@ -1,14 +1,12 @@
 class Todo {
     title;
-    description;
-    dueDate;
-    priority;
+    due;
+    prio;
 
-    constructor(title, description, dueDate, priority) {
+    constructor(title, due, prio) {
         this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
+        this.due = due;
+        this.prio = prio;
     }
 
     setTitle(title) {
@@ -19,29 +17,51 @@ class Todo {
         return this.title;
     }
 
-    setDescription(description) {
-        this.description = description;
+
+    setDue(due) {
+        this.due = due;
     }
 
-    getDescription() {
-        return this.description;
+    getDue() {
+        return this.due;
     }
 
-    setDueDate(dueDate) {
-        this.dueDate = dueDate;
+    setPriority(prio) {
+        this.prio = prio;
     }
 
-    getDueDate() {
-        return this.dueDate;
-    }
-
-    setPriority(priority) {
-        this.priority = priority;
-    }
-
-    getPriority() {
-        return this.priority;
+    getPrio() {
+        return this.prio;
     }
 }
 
-export {Todo};
+class Project {
+    title;
+    todoList = [];
+
+    constructor(title){
+        this.title = title;
+    }
+
+    setTitle(title){
+        this.title = title;
+    }
+
+    getTitle(){
+        return this.title;
+    }
+
+    addTodo(title,due,prio){
+        this.todoList.push(new Todo(title,due,prio));
+    }
+
+    getTodo(id){
+        return this.todoList[id];
+    }
+
+    getTodos(){
+        return this.todoList;
+    }
+}
+
+export {Todo, Project};
