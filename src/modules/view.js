@@ -8,15 +8,15 @@ class View {
 
     displayProjects(currentProjectsList) {
       this.projectList.innerHTML = "";
+      let id = 0;
       currentProjectsList.forEach((project) => {
-        this.projectList.appendChild(this.createLi(project.title));
+        this.projectList.appendChild(this.createLi(project.title, id++));
       });
     }
     
-    createLi(projectTitle) {
+    createLi(projectTitle, id) {
       const newLi = document.createElement("li");
       newLi.textContent = projectTitle;
-      let id = parseInt(newLi.previousElementSibling?.getAttribute("id")) +1 || 0;
       newLi.setAttribute("id", id);
       return newLi;
     }
@@ -24,16 +24,18 @@ class View {
     displayTodos(currentTodoArray) {
       // Wipeout current list
       this.todoTable.innerHTML = "";
+      let id = 0;
       // loop through list
       currentTodoArray.forEach((todo) => {
         // Create and add a new row to the table
-        this.todoTable.appendChild(createRow(todo.title));
+        this.todoTable.appendChild(this.createRow(todo.title, id++));
       });
     }
     
-    createRow(title) {
+    createRow(title, id) {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `<td>${title}</td>`;
+      newRow.setAttribute("id", id);
       return newRow;
     }
 }

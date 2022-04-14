@@ -6,7 +6,7 @@ import {Controller} from "./modules/controller";
 
 window.addEventListener("load", () => {
     const controller = new Controller();
-    controller.listenForProjectAdd();
-    controller.listenForTodoAdd();
-    controller.listenForProjects();
+    controller.initializeUI();
 });
+
+/* Next step: Display Todos associated with the active project */

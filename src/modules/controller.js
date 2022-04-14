@@ -19,13 +19,21 @@ class Controller {
     this.projectInputField = document.querySelector("#projectsInputField");
     this.addProjectButton = document.querySelector(".addProjectButton");
     this.currentProjectId = 0;
-    this.allCurrentProjects = document.querySelector("li");
   }
-
+  
+  initializeUI(){
+    this.view.displayProjects(this.model.getProjects());
+    this.listenForProjects();
+    this.listenForProjectAdd();
+    this.listenForTodoAdd();
+  }
+  
   listenForProjects() {
+    this.allCurrentProjects = Array.from(document.querySelectorAll("li"));
     this.allCurrentProjects?.forEach((project) => {
       project.addEventListener("click", (e) => {
         this.currentProjectId = e.target.getAttribute("id");
+        console.log(this.currentProjectId);
       });
     });
   }
@@ -35,13 +43,14 @@ class Controller {
       let projectTitle = this.projectInputField.value;
       this.model.addProject(projectTitle);
       this.view.displayProjects(this.model.getProjects());
+      this.listenForProjects();
     });
   }
 
   listenForTodoAdd() {
     this.addTodoButton.addEventListener("click", () => {
       let todoTitle = this.todoInputField.value;
-      this.model.addTodoToProject(this.currentProjectId);
+      this.model.addTodoToProject(this.currentProjectId, todoTitle);
       this.view.displayTodos(
         this.model.getProject(this.currentProjectId).getTodos()
       );
