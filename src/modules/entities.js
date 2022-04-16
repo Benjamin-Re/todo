@@ -2,11 +2,21 @@ class Todo {
     title;
     due;
     prio;
+    description;
 
     constructor(title, due, prio) {
         this.title = title;
         this.due = due;
         this.prio = prio;
+    }
+
+    setDescription(text){
+        this.description=text;
+        console.log(this.description);
+    }
+
+    getDescription(){
+        return this.description;
     }
 
     setTitle(title) {

@@ -16,10 +16,23 @@
       </ul>
     </aside>
     <main>
-      <input type="text" name="todoInputField" id="todoInputField">
-      <button class="addTodoButton">+</button>
       <div class="content">
         <h1>Todos</h1>
+        What is going on?
+        <button class="showPopupButton">+</button>
+        <div class="popup">
+          <label for="todoInputField">Title</label>
+          <input type="text" name="todoInputField" id="todoInputField">
+          <label for="dateInput">Due Date</label>
+          <input type="date" name="dateInput" id="dateInput" value="2022-04-16">
+          <label for="prio">Priority</label>
+          <select name="prio" id="prio">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="L">L</option>
+          </select>
+          <button class="addTodoButton">Add</button>
+        </div>
         <table>
           <thead>
             <tr>
@@ -29,7 +42,6 @@
             </tr>
           </thead>
           <tbody>
-            
           </tbody>
         </table>
       </div>

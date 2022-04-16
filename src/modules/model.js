@@ -25,6 +25,11 @@ class Model {
         console.log(this.projectList);
     }
 
+    addDescriptionToTodo(projectId, todoId, text){
+        this.projectList[projectId].getTodo(todoId).setDescription(text);
+        
+    }
+
 }
 
 

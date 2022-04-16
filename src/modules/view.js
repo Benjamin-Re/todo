@@ -2,7 +2,7 @@ class View {
     todoTable;
     projectList;
     constructor(){
-        this.todoTable = document.querySelector("table");
+        this.todoTable = document.querySelector("tbody");
         this.projectList = document.querySelector(".projectList");
     }
 
@@ -28,16 +28,28 @@ class View {
       // loop through list
       currentTodoArray.forEach((todo) => {
         // Create and add a new row to the table
-        this.todoTable.appendChild(this.createRow(todo.title, id++));
+        this.todoTable.appendChild(this.createRow(todo.title, todo.due, todo.prio, id++));
+        this.todoTable.appendChild(this.createNewTodoPopup(todo.description));
       });
     }
     
-    createRow(title, id) {
+    createRow(title, due, prio, id) {
       const newRow = document.createElement("tr");
-      newRow.innerHTML = `<td>${title}</td>`;
+      newRow.innerHTML = `<td>${title}</td>
+      <td>${due}</td><td>${prio}</td>`;
       newRow.setAttribute("id", id);
       return newRow;
     }
+
+    createNewTodoPopup(description){
+      const newRowPopup = document.createElement("tr");
+      newRowPopup.innerHTML = `<td><textarea>${description}</textarea></td>
+      <td><i class="fa-solid fa-pencil"></i></td>
+     <td><i class="fa-solid fa-trash"></td>`;
+      newRowPopup.setAttribute("class", "popup");
+      return newRowPopup;
+    }
+
 }
 
 export { View };
