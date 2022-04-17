@@ -69,8 +69,19 @@ class Project {
         return this.todoList[id];
     }
 
+    setTodo(id, title, due, prio, description){
+        this.todoList[id].setTitle(title);
+        this.todoList[id].setDue(due);
+        this.todoList[id].setPriority(prio);
+        this.todoList[id].setDescription(description);
+    }
+
     getTodos(){
         return this.todoList;
+    }
+
+    deleteTodo(id){
+        this.todoList.splice(id,1);
     }
 }
 

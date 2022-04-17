@@ -52,7 +52,6 @@ class Controller {
   }
 
   listenForProjectAdd() {
-    
     this.addProjectButton.addEventListener("click", () => {
       this.addProjectHelper();
     });
@@ -77,11 +76,11 @@ class Controller {
       this.addTodoHelper();
     });
     // Listen for keypress also
-    this.todoInputField.addEventListener("keypress", (e)=>{
-      if(e.key==="Enter"){
+    this.todoInputField.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
         this.addTodoHelper();
       }
-    })
+    });
   }
 
   addTodoHelper() {
@@ -100,6 +99,56 @@ class Controller {
     this.popup.classList.remove("active");
     this.listenForDescriptions();
     this.listenForTodos();
+    this.listenForDelete();
+    this.listenForEdit();
+  }
+
+  // Listen for delete icon
+  listenForDelete() {
+    const deleteIcons = Array.from(document.querySelectorAll(".trash-icon"));
+    deleteIcons.forEach((icon) => {
+      icon.parentNode.addEventListener("click", () => {
+        // Get id of corresponding todo
+        let thisTodoId =
+          +icon.parentNode.parentNode.previousElementSibling.getAttribute("id");
+        this.model.getProject(this.currentProjectId).deleteTodo(thisTodoId);
+        this.view.displayTodos(
+          this.model.getProject(this.currentProjectId).getTodos()
+        );
+      });
+    });
+  }
+
+  listenForEdit(){
+    const editIcons = Array.from(document.querySelectorAll(".edit-icon"));
+    editIcons.forEach((icon)=>{
+      icon.addEventListener("click", ()=>{
+        // Get id of todo to edit
+        let thisTodoId =
+          +icon.parentNode.parentNode.previousElementSibling.getAttribute("id");
+        // Get data from the popup + descr
+        this.popup.classList.add("active");
+        // Hide the Add button (its listening to add a new todo)
+        this.popup.lastElementChild.style.display="none";
+        // Disable the trash can while editing
+        icon.parentElement.nextElementSibling.firstChild.style.display="none";
+        // Add an update button (which will update not add a new one)
+        const updateButton = document.createElement("button");
+        updateButton.textContent="update";
+        this.popup.appendChild(updateButton);
+        let todoTitle = this.todoInputField.value;
+        let todoDate = this.todoDate.value;
+        let todoPrio = this.todoPrio.value;
+        let todoDescription = icon.parentNode.previousElementSibling.firstChild.value;
+        this.model.getProject(this.currentProjectId).setTodo(
+          thisTodoId,
+          todoTitle,
+          todoDate,
+          todoPrio,
+          todoDescription,
+        );
+      })
+    })
   }
 
   listenForTodos() {

@@ -44,8 +44,8 @@ class View {
     createNewTodoPopup(description){
       const newRowPopup = document.createElement("tr");
       newRowPopup.innerHTML = `<td><textarea>${description}</textarea></td>
-      <td><i class="fa-solid fa-pencil"></i></td>
-     <td><i class="fa-solid fa-trash"></td>`;
+      <td><div class="edit-icon"><i class="fa-solid fa-pencil"></i></div></td>
+     <td><div class="trash-icon"><i class="fa-solid fa-trash"></div></td>`;
       newRowPopup.setAttribute("class", "popup");
       return newRowPopup;
     }
