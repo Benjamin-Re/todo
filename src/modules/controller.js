@@ -132,10 +132,12 @@ class Controller {
         this.popup.lastElementChild.style.display="none";
         // Disable the trash can while editing
         icon.parentElement.nextElementSibling.firstChild.style.display="none";
+        // Also disable other todos to be clicked
         // Add an update button (which will update not add a new one)
         const updateButton = document.createElement("button");
         updateButton.textContent="update";
         this.popup.appendChild(updateButton);
+        // Add event listener to the update button
         let todoTitle = this.todoInputField.value;
         let todoDate = this.todoDate.value;
         let todoPrio = this.todoPrio.value;
