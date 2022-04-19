@@ -1,13 +1,20 @@
 class Todo {
+    static id = 0;
     title;
     due;
     prio;
     description;
 
     constructor(title, due, prio) {
+        this.id = ++Todo.id;
         this.title = title;
         this.due = due;
         this.prio = prio;
+        console.log(this.id);
+    }
+
+    getId(){
+        return this.id;
     }
 
     setDescription(text){

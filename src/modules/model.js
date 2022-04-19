@@ -30,6 +30,10 @@ class Model {
         
     }
 
+    updateTodo(projectId, todoId, title, due, prio, description){
+        this.projectList[projectId].setTodo(todoId, title, due, prio, description);
+    }
+
 }
 
 

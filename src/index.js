@@ -9,4 +9,4 @@ window.addEventListener("load", () => {
     controller.initializeUI();
 });
 
-/* Next step: Display Todos associated with the active project */
+/* Next step: Enable update function */

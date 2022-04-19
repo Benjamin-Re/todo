@@ -36,7 +36,3 @@ footer {
 .active {
   display: block;
 }
-
-svg {
-  pointer-events: auto;
-}

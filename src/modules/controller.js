@@ -14,6 +14,8 @@ class Controller {
   popup;
   todoDate;
   todoPrio;
+  isUpdate;
+  idToUpdate;
 
   constructor() {
     this.model = new Model();
@@ -27,6 +29,8 @@ class Controller {
     this.popup = document.querySelector(".popup");
     this.todoDate = document.querySelector("#dateInput");
     this.todoPrio = document.querySelector("#prio");
+    this.isUpdate = false;
+    this.idToUpdate = -1;
   }
 
   initializeUI() {
@@ -69,6 +73,7 @@ class Controller {
     this.view.displayProjects(this.model.getProjects());
     this.listenForProjects();
     this.listenForDescriptions();
+    this.listenForEdit();
   }
 
   listenForTodoAdd() {
@@ -87,12 +92,22 @@ class Controller {
     let todoTitle = this.todoInputField.value;
     let todoDate = this.todoDate.value;
     let todoPrio = this.todoPrio.value;
-    this.model.addTodoToProject(
-      this.currentProjectId,
-      todoTitle,
-      todoDate,
-      todoPrio
-    );
+    if(this.isUpdate){
+      // If we update dont create a new todo but overwrite the old one
+      // The id of the todo to update is saved in a global variable
+      // Also get the description as the popup is showing at this flow
+      let todoDescription = document.querySelector(`tr[id='${this.idToUpdate}']`).nextElementSibling.firstElementChild.firstElementChild.value;
+      this.model.updateTodo(this.currentProjectId, this.idToUpdate, todoTitle, todoDate, todoPrio, todoDescription);      
+      this.isUpdate=false;
+    } else {
+      this.model.addTodoToProject(
+        this.currentProjectId,
+        todoTitle,
+        todoDate,
+        todoPrio
+      );
+    }
+    // Display all todos after the change
     this.view.displayTodos(
       this.model.getProject(this.currentProjectId).getTodos()
     );
@@ -123,32 +138,13 @@ class Controller {
     const editIcons = Array.from(document.querySelectorAll(".edit-icon"));
     editIcons.forEach((icon)=>{
       icon.addEventListener("click", ()=>{
-        // Get id of todo to edit
-        let thisTodoId =
+        // Set the global update flag to true so the add button handlers can know. 
+        this.isUpdate=true;
+        // Get id of todo to edit and save it in global variable
+        this.idToUpdate =
           +icon.parentNode.parentNode.previousElementSibling.getAttribute("id");
         // Get data from the popup + descr
         this.popup.classList.add("active");
-        // Hide the Add button (its listening to add a new todo)
-        this.popup.lastElementChild.style.display="none";
-        // Disable the trash can while editing
-        icon.parentElement.nextElementSibling.firstChild.style.display="none";
-        // Also disable other todos to be clicked
-        // Add an update button (which will update not add a new one)
-        const updateButton = document.createElement("button");
-        updateButton.textContent="update";
-        this.popup.appendChild(updateButton);
-        // Add event listener to the update button
-        let todoTitle = this.todoInputField.value;
-        let todoDate = this.todoDate.value;
-        let todoPrio = this.todoPrio.value;
-        let todoDescription = icon.parentNode.previousElementSibling.firstChild.value;
-        this.model.getProject(this.currentProjectId).setTodo(
-          thisTodoId,
-          todoTitle,
-          todoDate,
-          todoPrio,
-          todoDescription,
-        );
       })
     })
   }
