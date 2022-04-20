@@ -9,4 +9,4 @@ window.addEventListener("load", () => {
     controller.initializeUI();
 });
 
-/* Next step: Enable update function */
+/* Next step: Add persistence */

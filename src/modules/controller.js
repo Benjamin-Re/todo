@@ -34,7 +34,13 @@ class Controller {
   }
 
   initializeUI() {
-    this.view.displayProjects(this.model.getProjects());
+    // Load stored data when the page is first loaded
+    let data = this.getData();
+    console.log(data);
+    console.log(this.model.getProjects());
+    this.view.displayProjects(data);  
+    
+    // this.view.displayProjects(this.model.getProjects());
     this.listenForProjects();
     this.listenForProjectAdd();
     this.listenForTodoAdd();
@@ -73,6 +79,8 @@ class Controller {
     let projectTitle = this.projectInputField.value;
     this.model.addProject(projectTitle);
     this.view.displayProjects(this.model.getProjects());
+    // Save your current data
+    this.saveData();
     this.listenForProjects();
     this.listenForDescriptions();
     this.listenForEdit();
@@ -118,6 +126,8 @@ class Controller {
     this.listenForTodos();
     this.listenForDelete();
     this.listenForEdit();
+    // Save the current data
+    this.saveData();
   }
 
   // Listen for delete icon
@@ -186,6 +196,19 @@ class Controller {
       });
     });
   }
+
+  // Store data whenever a project or todo is added
+  saveData() {
+    let data = JSON.stringify(this.model.getProjects());
+    console.log(`stringified data: ${data}`);
+    localStorage.setItem("projects", data);
+  }
+
+  getData() {
+    let data = localStorage.getItem("projects");
+    return JSON.parse(data);
+  }
+
 }
 
 export { Controller };
