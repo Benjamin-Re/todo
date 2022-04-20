@@ -51,6 +51,8 @@ class Controller {
           this.model.getProject(this.currentProjectId).getTodos()
         );
         this.listenForTodos();
+        this.listenForEdit();
+        this.listenForDelete();
       });
     });
   }
