@@ -10,7 +10,10 @@ class Todo {
         this.title = title;
         this.due = due;
         this.prio = prio;
-        console.log(this.id);
+    }
+
+    setId(id){
+        this.id = id;
     }
 
     getId(){
@@ -70,6 +73,10 @@ class Project {
 
     addTodo(title,due,prio){
         this.todoList.push(new Todo(title,due,prio));
+    }
+
+    addRevivedTodo(todo){
+        this.todoList.push(todo);
     }
 
     getTodo(id){

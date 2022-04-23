@@ -1,5 +1,6 @@
 import { View } from "./view";
 import { Model } from "./model.js";
+import { Project, Todo } from "./entities";
 
 class Controller {
   model;
@@ -36,16 +37,34 @@ class Controller {
   initializeUI() {
     // Load stored data when the page is first loaded
     let data = this.getData();
-    console.log(data);
-    console.log(this.model.getProjects());
-    this.view.displayProjects(data);  
-    
-    // this.view.displayProjects(this.model.getProjects());
+    if(data){
+      console.log("There is data");
+      this.model.revive(data);
+    } else {
+      console.log("There is NO data");
+    }
+    let currentProjects = this.model.getProjects();
+    console.log(currentProjects);
+    this.view.displayProjects(currentProjects);
     this.listenForProjects();
     this.listenForProjectAdd();
     this.listenForTodoAdd();
     this.listenForShowPopupButton();
   }
+
+  // Store data whenever a project or todo is added
+  saveData() {
+    let data = JSON.stringify(this.model.getProjects());
+    console.log(`stringified data: ${data}`);
+    localStorage.setItem("projects", data);
+  }
+
+  getData() {
+    let data = localStorage.getItem("projects");    
+    return JSON.parse(data);
+  }
+
+
 
   listenForProjects() {
     this.allCurrentProjects = Array.from(document.querySelectorAll("li"));
@@ -142,6 +161,7 @@ class Controller {
         this.view.displayTodos(
           this.model.getProject(this.currentProjectId).getTodos()
         );
+      this.saveData();
       });
     });
   }
@@ -192,22 +212,14 @@ class Controller {
             correspondingTodoId,
             e.target.value
           );
+        // Save the description
+        this.saveData();
         }
       });
     });
   }
 
-  // Store data whenever a project or todo is added
-  saveData() {
-    let data = JSON.stringify(this.model.getProjects());
-    console.log(`stringified data: ${data}`);
-    localStorage.setItem("projects", data);
-  }
 
-  getData() {
-    let data = localStorage.getItem("projects");
-    return JSON.parse(data);
-  }
 
 }
 
