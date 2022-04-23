@@ -1,30 +1,72 @@
+:root {
+  --body-color: #e63946;
+  --header-color: #1d3557;
+  --footer-color: #1d3557 ;
+  --aside-color: #f1faee;
+  --content-color: #f1faee;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: red;
+  background-color: var(--body-color);
   height: 100vh;
+  width: 100vw;
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-rows: .5fr 3fr .5fr;
   font-family: monospace;
 }
 
+header, aside, .content, footer {
+  padding: 0;
+}
+
+
+
+button {
+  padding: 10px;
+  border: none;
+}
+
 header {
-  background-color: aliceblue;
+  color: white;
+  background-color: var(--header-color);
+  font-size: x-large;
   grid-column: 1/3;
   grid-row: 1/2;
 }
 
 aside {
+  background-color: var(--aside-color);
   grid-column: 1/2;
   grid-row: 2/3;
 }
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 .content {
-  background-color: coral;
+  padding-left: 1rem;
+  background-color: var(--content-color);
   grid-column: 2/3;
   grid-row: 2/3;
 }
 
 footer {
-  background-color: aqua;
+  color: white;
+  background-color: var(--footer-color);
   grid-column: 1/3;
   grid-row: 3/4;
 }

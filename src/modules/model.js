@@ -50,7 +50,6 @@ class Model {
 
   addTodoToProject(id, title, due, prio) {
     this.projectList[id].addTodo(title, due, prio);
-
   }
 
   addDescriptionToTodo(projectId, todoId, text) {
@@ -59,6 +58,10 @@ class Model {
 
   updateTodo(projectId, todoId, title, due, prio, description) {
     this.projectList[projectId].setTodo(todoId, title, due, prio, description);
+  }
+
+  deleteProject(id){
+    this.projectList.splice(id, 1);
   }
 }
 

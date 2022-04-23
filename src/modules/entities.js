@@ -22,7 +22,6 @@ class Todo {
 
     setDescription(text){
         this.description=text;
-        console.log(this.description);
     }
 
     getDescription(){
@@ -57,10 +56,20 @@ class Todo {
 
 class Project {
     title;
+    static id = 0;
     todoList = [];
 
     constructor(title){
         this.title = title;
+        this.id = ++Project.id;
+    }
+
+    setId(id){
+        this.id = id;
+    }
+
+    getId(){
+        return this.id;
     }
 
     setTitle(title){

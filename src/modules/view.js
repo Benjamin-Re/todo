@@ -17,6 +17,7 @@ class View {
     createLi(projectTitle, id) {
       const newLi = document.createElement("li");
       newLi.textContent = projectTitle;
+      newLi.innerHTML = `${projectTitle} <div class="projectDel"><i class="fa-solid fa-x"></div>`;
       newLi.setAttribute("id", id);
       return newLi;
     }

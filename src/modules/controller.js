@@ -37,7 +37,7 @@ class Controller {
   initializeUI() {
     // Load stored data when the page is first loaded
     let data = this.getData();
-    if(data){
+    if (data) {
       console.log("There is data");
       this.model.revive(data);
     } else {
@@ -60,17 +60,22 @@ class Controller {
   }
 
   getData() {
-    let data = localStorage.getItem("projects");    
+    let data = localStorage.getItem("projects");
     return JSON.parse(data);
   }
-
-
 
   listenForProjects() {
     this.allCurrentProjects = Array.from(document.querySelectorAll("li"));
     this.allCurrentProjects?.forEach((project) => {
       project.addEventListener("click", (e) => {
-        this.currentProjectId = e.target.getAttribute("id");
+        // Check if user clicked on delete div
+        if (e.target.tagName === "svg") {
+          this.model.deleteProject(this.currentProjectId);
+          this.view.displayProjects(this.model.getProjects());
+          this.listenForProjects();
+          this.saveData();
+        }
+        this.currentProjectId = e.currentTarget.getAttribute("id");
         // Display all todos for active project
         this.view.displayTodos(
           this.model.getProject(this.currentProjectId).getTodos()
@@ -121,13 +126,22 @@ class Controller {
     let todoTitle = this.todoInputField.value;
     let todoDate = this.todoDate.value;
     let todoPrio = this.todoPrio.value;
-    if(this.isUpdate){
+    if (this.isUpdate) {
       // If we update dont create a new todo but overwrite the old one
       // The id of the todo to update is saved in a global variable
       // Also get the description as the popup is showing at this flow
-      let todoDescription = document.querySelector(`tr[id='${this.idToUpdate}']`).nextElementSibling.firstElementChild.firstElementChild.value;
-      this.model.updateTodo(this.currentProjectId, this.idToUpdate, todoTitle, todoDate, todoPrio, todoDescription);      
-      this.isUpdate=false;
+      let todoDescription = document.querySelector(
+        `tr[id='${this.idToUpdate}']`
+      ).nextElementSibling.firstElementChild.firstElementChild.value;
+      this.model.updateTodo(
+        this.currentProjectId,
+        this.idToUpdate,
+        todoTitle,
+        todoDate,
+        todoPrio,
+        todoDescription
+      );
+      this.isUpdate = false;
     } else {
       this.model.addTodoToProject(
         this.currentProjectId,
@@ -161,24 +175,26 @@ class Controller {
         this.view.displayTodos(
           this.model.getProject(this.currentProjectId).getTodos()
         );
-      this.saveData();
+        this.listenForTodos();
+        this.listenForEdit();
+        this.saveData();
       });
     });
   }
 
-  listenForEdit(){
+  listenForEdit() {
     const editIcons = Array.from(document.querySelectorAll(".edit-icon"));
-    editIcons.forEach((icon)=>{
-      icon.addEventListener("click", ()=>{
-        // Set the global update flag to true so the add button handlers can know. 
-        this.isUpdate=true;
+    editIcons.forEach((icon) => {
+      icon.addEventListener("click", () => {
+        // Set the global update flag to true so the add button handlers can know.
+        this.isUpdate = true;
         // Get id of todo to edit and save it in global variable
         this.idToUpdate =
           +icon.parentNode.parentNode.previousElementSibling.getAttribute("id");
         // Get data from the popup + descr
         this.popup.classList.add("active");
-      })
-    })
+      });
+    });
   }
 
   listenForTodos() {
@@ -212,15 +228,12 @@ class Controller {
             correspondingTodoId,
             e.target.value
           );
-        // Save the description
-        this.saveData();
+          // Save the description
+          this.saveData();
         }
       });
     });
   }
-
-
-
 }
 
 export { Controller };
